@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クリス・モンセン 新コミュニティ構想 | Googleエコシステム活用</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-arrow::after {
+            content: '▼';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #67A5C3;
+        }
+        .flow-card {
+            border: 2px solid #67A5C3;
+            background-color: #F2F8FB;
+            color: #003F5C;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #67A5C3;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-[#F2F8FB] text-[#003F5C]">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#003F5C] mb-4">未来のコミュニティを構築する</h1>
+            <p class="text-lg md:text-xl text-[#366E8A]">クリス・モンセンと共に創る、Googleエコシステムを活用した100人が輝く場所</p>
+        </header>
+
+        <main class="space-y-16 md:space-y-24">
+
+            <section id="pillar1">
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-center mb-2 text-[#003F5C]">第一の柱：メンターとの繋がり</h2>
+                    <p class="text-center text-[#366E8A] mb-8 max-w-2xl mx-auto">受動的な学習から、クリス・モンセンと直接的・間接的に繋がり、双方向のコミュニケーションが生まれる環境へ。</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="flow-card rounded-lg p-6">
+                            <h3 class="text-xl font-bold mb-4 text-center">ライブQ&Aセッション</h3>
+                            <p class="text-sm mb-6 text-center">定期開催されるセッションで、あなたの疑問にクリスが直接答えます。</p>
+                            <div class="relative flex flex-col items-center space-y-4">
+                                <div class="w-full p-3 text-center bg-white rounded-md shadow-sm">参加者からの事前質問 (Forms)</div>
+                                <div class="text-2xl text-[#67A5C3]">▼</div>
+                                <div class="w-full p-3 text-center bg-white rounded-md shadow-sm">ライブQ&A (Meet)</div>
+                                <div class="text-2xl text-[#67A5C3]">▼</div>
+                                <div class="w-full p-3 text-center bg-white rounded-md shadow-sm">録画を共有 (Drive & Sites)</div>
+                            </div>
+                        </div>
+
+                        <div class="flow-card rounded-lg p-6">
+                            <h3 class="text-xl font-bold mb-4 text-center">AIオペレーターによる支援 ✨</h3>
+                            <p class="text-sm mb-6 text-center">クリスの思考を学習したAIが、24時間365日あなたの学びをサポート。</p>
+                            <div class="relative flex flex-col items-center space-y-4 mb-8">
+                                <div class="w-full p-3 text-center bg-white rounded-md shadow-sm">あなたの学習内容・疑問</div>
+                                <div class="text-2xl text-[#67A5C3]">▼</div>
+                                <div class="w-full p-3 text-center bg-[#ABDFF7] rounded-md shadow-sm font-bold">AIが即座にフィードバック</div>
+                                <div class="text-2xl text-[#67A5C3]">▼</div>
+                                <div class="w-full p-3 text-center bg-white rounded-md shadow-sm">複雑な質問はクリスへ</div>
+                            </div>
+
+                            <div class="mt-6 p-4 bg-white rounded-lg shadow-inner">
+                                <h4 class="font-bold mb-2 text-[#003F5C]">AIによるテキスト要約</h4>
+                                <p class="text-sm text-[#366E8A] mb-3">学びたいテキストをここに入力すると、AIが主要なポイントを要約します。</p>
+                                <textarea id="llmInput" class="w-full p-2 border border-[#ABDFF7] rounded-md focus:outline-none focus:ring-2 focus:ring-[#67A5C3] mb-3 text-[#003F5C] bg-[#F2F8FB]" rows="6" placeholder="例：コミュニティの理念に関する長文、学習資料の抜粋など"></textarea>
+                                <button id="summarizeButton" class="w-full bg-[#67A5C3] hover:bg-[#366E8A] text-white font-bold py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center">
+                                    <span id="buttonText">AIで要約する ✨</span>
+                                    <div id="loadingSpinner" class="spinner ml-2 hidden"></div>
+                                </button>
+                                <div class="mt-4 p-3 bg-[#F2F8FB] border border-[#ABDFF7] rounded-md text-sm text-[#003F5C]" id="llmOutput">
+                                    ここに要約結果が表示されます。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="pillar2">
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-center mb-2 text-[#003F5C]">第二の柱：目的別の成長パス</h2>
+                    <p class="text-center text-[#366E8A] mb-8 max-w-2xl mx-auto">あなたの「今」に合わせた3つのグループで、自分の可能性を最大限に引き出します。</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <div class="space-y-6">
+                                <div class="flex items-start space-x-4 p-4 rounded-lg bg-[#F2F8FB]">
+                                    <span class="text-3xl mt-1">🧠</span>
+                                    <div>
+                                        <h3 class="font-bold">Vision発掘グループ</h3>
+                                        <p class="text-sm text-[#366E8A]">安全な場で内省を深め、本当にやりたいことを見つけたい方へ。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4 p-4 rounded-lg bg-[#F2F8FB]">
+                                    <span class="text-3xl mt-1">💪</span>
+                                    <div>
+                                        <h3 class="font-bold">行動習慣化グループ</h3>
+                                        <p class="text-sm text-[#366E8A]">目標達成に向けた行動を継続し、確実な変化を生み出したい方へ。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4 p-4 rounded-lg bg-[#F2F8FB]">
+                                    <span class="text-3xl mt-1">🤖</span>
+                                    <div>
+                                        <h3 class="font-bold">Vision Force AI グループ</h3>
+                                        <p class="text-sm text-[#366E8A]">AIを活用し、副業やビジネスを具体的に構築したい方へ。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="memberGoalsChart"></canvas>
+                        </div>
+                    </div>
+                     <p class="text-center text-xs text-gray-500 mt-4">各グループの参加者構成（想定）</p>
+                </div>
+            </section>
+            
+            <section id="pillar3">
+                 <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-center mb-2 text-[#003F5C]">第三の柱：メンバー間の相乗効果</h2>
+                    <p class="text-center text-[#366E8A] mb-8 max-w-2xl mx-auto">100人のビジョンが交差し、互いに助け合い、高め合う。コミュニティの真価はここにあります。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                        <div class="flow-card rounded-lg p-6 h-full">
+                            <h3 class="text-xl font-bold mb-4 text-center">ビジョンマップ & ストーリー</h3>
+                            <p class="text-sm mb-6 text-center">個々のビジョンを可視化し、共感と協力の輪を広げます。</p>
+                            <div class="relative w-full h-48 bg-white rounded-lg p-4 flex items-center justify-center">
+                                <div class="absolute top-4 left-4 p-2 bg-[#ABDFF7] rounded-full text-xs">あなた</div>
+                                <div class="absolute top-12 right-8 p-2 bg-[#67A5C3] rounded-full text-xs">メンバーA</div>
+                                <div class="absolute bottom-4 left-16 p-2 bg-[#67A5C3] rounded-full text-xs">メンバーB</div>
+                                <div class="absolute bottom-10 right-2 p-2 bg-[#67A5C3] rounded-full text-xs">メンバーC</div>
+                                <div class="absolute top-1/2 left-1/2 w-0.5 h-12 bg-[#67A5C3] transform -translate-x-1/2 -translate-y-1/2 rotate-45"></div>
+                                <div class="absolute top-1/2 left-1/2 w-0.5 h-16 bg-[#67A5C3] transform -translate-x-1/2 -translate-y-1/2 -rotate-30"></div>
+                                <div class="absolute top-1/2 left-1/2 w-0.5 h-20 bg-[#67A5C3] transform -translate-x-1/2 -translate-y-1/2 rotate-120"></div>
+                                <p class="text-center text-xs text-[#003F5C]">Google My Mapsで<br>繋がりを視覚化</p>
+                            </div>
+                        </div>
+                        <div class="flow-card rounded-lg p-6 h-full">
+                           <h3 class="text-xl font-bold mb-4 text-center">テーマ別交流チャンネル</h3>
+                           <p class="text-sm mb-6 text-center">Google Chat Spacesで、興味のあるトピックについて深く語り合えます。</p>
+                           <div class="chart-container h-48">
+                                <canvas id="chatSpacesChart"></canvas>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="architecture">
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-center mb-2 text-[#003F5C]">コミュニティを支える技術基盤</h2>
+                    <p class="text-center text-[#366E8A] mb-8 max-w-2xl mx-auto">すべての活動は、シームレスに連携するGoogleのツール群によって支えられています。</p>
+                    <div class="bg-[#F2F8FB] border-2 border-dashed border-[#67A5C3] rounded-lg p-6">
+                        <div class="text-center mb-6">
+                            <div class="inline-block p-4 bg-[#003F5C] text-white rounded-lg shadow-md">
+                                <h3 class="text-xl font-bold">Google Sites: コミュニティハブ</h3>
+                            </div>
+                        </div>
+                        <div class="text-center text-4xl text-[#67A5C3] mb-4 transform rotate-90 md:rotate-0">➔</div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                            <div class="p-3 bg-white rounded-md shadow-sm">
+                                <h4 class="font-bold">学習</h4>
+                                <p class="text-xs">Classroom, Meet, AI</p>
+                            </div>
+                            <div class="p-3 bg-white rounded-md shadow-sm">
+                                <h4 class="font-bold">交流</h4>
+                                <p class="text-xs">Chat, Meet, Jamboard</p>
+                            </div>
+                            <div class="p-3 bg-white rounded-md shadow-sm">
+                                <h4 class="font-bold">管理</h4>
+                                <p class="text-xs">Drive, Calendar, Forms</p>
+                            </div>
+                            <div class="p-3 bg-white rounded-md shadow-sm">
+                                <h4 class="font-bold">可視化</h4>
+                                <p class="text-xs">My Maps, Sheets</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center mt-16 md:mt-24 pt-8 border-t border-[#ABDFF7]">
+             <p class="text-[#366E8A]">このコミュニティは、一人ひとりのビジョンが尊重され、共に成長できる持続可能な生態系を目指します。</p>
+             <p class="text-sm text-[#67A5C3] mt-2">クリス・モンセン & コミュニティ構築チーム</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const wrapLabel = (label, maxWidth) => {
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + ' ' + words[i]).length > maxWidth) {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                } else {
+                    currentLine += ' ' + words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+        
+        const chartPlugins = {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    color: '#003F5C',
+                    font: {
+                        family: "'Noto Sans JP', sans-serif"
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    title: tooltipTitleCallback
+                },
+                bodyFont: {
+                    family: "'Noto Sans JP', sans-serif"
+                },
+                titleFont: {
+                    family: "'Noto Sans JP', sans-serif"
+                }
+            }
+        };
+        
+        const chartScales = {
+            y: {
+                beginAtZero: true,
+                ticks: { color: '#366E8A' },
+                grid: { color: '#ABDFF7' }
+            },
+            x: {
+                ticks: { color: '#366E8A' },
+                grid: { display: false }
+            }
+        };
+        
+        const memberGoalsCtx = document.getElementById('memberGoalsChart');
+        if (memberGoalsCtx) {
+            new Chart(memberGoalsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Vision発掘', '行動習慣化', 'AIビジネス構築'],
+                    datasets: [{
+                        label: '参加者構成',
+                        data: [45, 35, 20],
+                        backgroundColor: ['#003F5C', '#366E8A', '#67A5C3'],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: chartPlugins
+                }
+            });
+        }
+        
+        const chatSpacesCtx = document.getElementById('chatSpacesChart');
+        if (chatSpacesCtx) {
+            new Chart(chatSpacesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['AI活用', 'マーケティング', '自己投資', '雑談・交流'],
+                    datasets: [{
+                        label: 'チャンネル投稿数',
+                        data: [85, 65, 72, 95],
+                        backgroundColor: '#67A5C3',
+                        borderColor: '#366E8A',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: chartPlugins,
+                    scales: {
+                        y: {
+                            ticks: { color: '#366E8A' },
+                            grid: { display: false }
+                        },
+                        x: {
+                           ticks: { color: '#366E8A' },
+                           grid: { color: '#ABDFF7' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // LLM Integration
+        document.addEventListener('DOMContentLoaded', () => {
+            const llmInput = document.getElementById('llmInput');
+            const summarizeButton = document.getElementById('summarizeButton');
+            const llmOutput = document.getElementById('llmOutput');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const buttonText = document.getElementById('buttonText');
+
+            if (summarizeButton) {
+                summarizeButton.addEventListener('click', async () => {
+                    const textToSummarize = llmInput.value.trim();
+                    if (!textToSummarize) {
+                        llmOutput.textContent = '要約するテキストを入力してください。';
+                        return;
+                    }
+
+                    buttonText.textContent = '要約中...';
+                    loadingSpinner.classList.remove('hidden');
+                    summarizeButton.disabled = true;
+                    llmOutput.textContent = '要約を生成中...';
+
+                    try {
+                        let chatHistory = [];
+                        const prompt = `以下のテキストの主要なポイントを日本語で要約してください。\n\nテキスト:\n"${textToSummarize}"`;
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                        const payload = { contents: chatHistory };
+                        const apiKey = "";
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const summaryText = result.candidates[0].content.parts[0].text;
+                            llmOutput.textContent = summaryText;
+                        } else {
+                            llmOutput.textContent = '要約を生成できませんでした。もう一度お試しください。';
+                        }
+                    } catch (error) {
+                        llmOutput.textContent = `エラーが発生しました: ${error.message}`;
+                    } finally {
+                        buttonText.textContent = 'AIで要約する ✨';
+                        loadingSpinner.classList.add('hidden');
+                        summarizeButton.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
