@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Ship Satori Institute: Future Mission Briefing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F2F8FB;
+            padding: 16px;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-card {
+            border: 2px solid #67A5C3;
+            background-color: #F2F8FB;
+            color: #003F5C;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #67A5C3;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: rotate(360deg); }
+        }
+        .space-bg {
+            background: linear-gradient(135deg, #003F5C 0%, #366E8A 100%);
+            color: #F2F8FB;
+        }
+        .card-panel {
+            background-color: #003F5C;
+            color: #F2F8FB;
+            border: 2px solid #67A5C3;
+        }
+        .light-panel {
+            background-color: #F2F8FB;
+            color: #003F5C;
+            border: 2px solid #ABDFF7;
+        }
+        .accent-text {
+            color: #ABDFF7;
+        }
+        .section-title {
+            background-color: #366E8A;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #F2F8FB;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .pulse-dot {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="text-[#003F5C]">
+
+    <!-- Outer neon-colored frame -->
+    <div class="border-8 border-[#ABDFF7] rounded-3xl shadow-xl shadow-[#ABDFF7]/50 p-4">
+        <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+
+            <header class="text-center mb-16 md:mb-24 space-bg p-8 md:p-12 rounded-lg shadow-xl">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 accent-text">Satori Institute Community Neo: Future Mission Briefing</h1>
+                <p class="text-lg md:text-2xl text-white mb-2">Creating a place where 100 people shine with Chris Monsen, leveraging the Google Ecosystem</p>
+                <p class="text-lg md:text-2xl text-white mb-6">Innovative Community "Star Ship Satori Institute", Ready for Departure!</p>
+                
+                <!-- New introductory premise -->
+                <p class="text-white text-lg md:text-xl mb-6">
+                    This document outlines the "Future Vision" conceived by Navigator Rikki. We welcome all crew members to engage in discussions and share your valuable insights on this material.
+                </p>
+
+                <div class="card-panel rounded-lg shadow-lg p-6 max-w-4xl mx-auto mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 text-white">Our Future Vision: Let's Create a Society Where Everyone Can Say "Help Me" 🌠</h2>
+                    <p class="text-base md:text-lg text-[#ABDFF7] text-left mb-4">
+                        The core of this journey is to create a space where each individual awakens to their inner potential and feels deeply fulfilled. We aim for a chain of "mutual aid" that springs naturally from the abundance of the heart, rather than from obligation. It's like a child, fully content with a new toy, spontaneously offering, "You can play with it a little, here you go!" to a friend nearby – realizing such a warm society.
+                    </p>
+                    <p class="text-base md:text-lg text-[#ABDFF7] text-left">
+                        "Star Ship Satori Institute" aims to become a successful model for communities worldwide, evolving into a "Big Community" on a global scale. Through the high-dimensional filter of cutting-edge AI, hearts and minds will connect authentically. As each individual awakens to infinite possibilities, we will shift towards activities that optimize the Earth's environment itself. Beyond human-centric business development, we advance for the development of Earth, a magnificent sentient being. Satori Institute Community Neo is a crucial core for this purpose, a testament to our grand co-creation with AI.
+                    </p>
+                </div>
+
+                <div class="light-panel rounded-lg shadow-md p-6 max-w-3xl mx-auto border border-[#67A5C3]">
+                    <h2 class="text-2xl font-bold text-[#003F5C] mb-4">The 3 Core Pillars of Satori Neo Community</h2>
+                    <ul class="list-disc list-inside text-left text-[#366E8A] space-y-3">
+                        <li>First Pillar: Direct Connection with the Mentor<br>Sharing the navigational compass with the Commander's wisdom and direct/indirect feedback.</li>
+                        <li>Second Pillar: Individually Optimized Growth Paths<br>Generating personalized growth paths tailored to each crew member's mission phase.</li>
+                        <li>Third Pillar: Crew Collaboration Network<br>Visualizing the vision of all crew members and establishing a communication network for natural cooperation and resonance.</li>
+                    </ul>
+                </div>
+            </header>
+
+            <main class="space-y-20 md:space-y-32">
+
+                <section id="cosmic-anomalies" class="light-panel rounded-lg shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <span class="section-title">Current Challenges: Obstacles to Our Evolution</span>
+                    </div>
+                    <p class="text-lg text-[#366E8A] text-center mb-8 max-w-3xl mx-auto">
+                        Previous communities faced challenges that hindered information flow and individual awakening processes, preventing further evolution.
+                    </p>
+                    <ul class="list-disc list-inside text-left text-[#003F5C] space-y-3 px-4 md:px-8">
+                        <li>Feedback Delays: Predominantly one-way information reception, lacking reciprocal feedback and personalized advice for learning.</li>
+                        <li>Uneven Participation: Active dialogue was often difficult, or diverse voices were not sufficiently encouraged. A few dominant voices monopolized the network, and a safe space for everyone to express themselves was lacking.</li>
+                        <li>Activity Stagnation: Regular activities often lacked new inspiration or discoveries. The community was stuck in inertia, with declining motivation for exciting exploration.</li>
+                        <li>Impeded Autonomous Growth: New missions and activities heavily relied on the central leader's propulsion, making it difficult for individual members to generate and sustain autonomous progress.</li>
+                    </ul>
+                    <p class="text-lg text-[#366E8A] text-center mt-8 max-w-3xl mx-auto">
+                        Overcoming these challenges, the "Star Ship Satori Institute" will evolve into a truly vibrant organism, where all crew members radiate their own light and collaborate to navigate the future.
+                    </p>
+                </section>
+
+                <section id="pillar1-detail" class="card-panel rounded-lg shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <span class="section-title">First Pillar: Direct Connection with the Mentor 📡</span>
+                    </div>
+                    <p class="text-lg text-white text-center mb-8 max-w-3xl mx-auto">
+                        Strengthening the Mentor's wisdom and direct/indirect feedback, activating two-way communication. The AI assistant acts as a "catalyst lighting the heart," providing linguistic support to promote awakening.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                        <div class="light-panel rounded-lg p-6 shadow-md">
+                            <h3 class="text-xl font-bold mb-4 text-center text-[#003F5C]">Direct Q&A with the Mentor 🌟</h3>
+                            <p class="text-sm mb-6 text-[#366E8A] text-center">Regular sessions for direct interaction with the Mentor. Your questions will illuminate the path.</p>
+                            <div class="relative flex flex-col items-center space-y-4">
+                                <div class="w-full p-3 text-center bg-white rounded-md shadow-sm text-[#003F5C]">Pre-session Question Form (Google Forms)</div>
+                                <span class="text-2xl text-[#67A5C3]">▼</span>
+                                <div class="w-full p-3 text-center bg-white rounded-md shadow-sm text-[#003F5C]">Live Dialogue Session (Google Meet)</div>
+                                <span class="text-2xl text-[#67A5C3]">▼</span>
+                                <div class="w-full p-3 text-center bg-white rounded-md shadow-sm text-[#003F5C]">Session Recording Share (Drive & Sites/Classroom)</div>
+                                <p class="text-xs text-gray-500 mt-2">AI automatically generates 60-second highlight clips from recordings for anytime review.</p>
+                            </div>
+                        </div>
+
+                        <div class="light-panel rounded-lg p-6 shadow-md">
+                            <h3 class="text-xl font-bold mb-4 text-center text-[#003F5C]">Cutting-edge AI for Personalized Support ✨</h3>
+                            <p class="text-sm mb-6 text-[#366E8A] text-center">AI trained on the Mentor's insights and advanced knowledge provides 24/7 learning support.</p>
+                            <div class="relative flex flex-col items-center space-y-4 mb-8">
+                                <div class="w-full p-3 text-center bg-white rounded-md shadow-sm text-[#003F5C]">Your Learning & Questions</div>
+                                <span class="text-2xl text-[#67A5C3]">▼</span>
+                                <div class="w-full p-3 text-center bg-[#ABDFF7] rounded-md shadow-sm font-bold text-[#003F5C]">AI provides instant feedback (Dialogflow/Gemini)</div>
+                                <span class="text-2xl text-[#67A5C3]">▼</span>
+                                <div class="w-full p-3 text-center bg-white rounded-md shadow-sm text-[#003F5C]">Complex inquiries routed to the Mentor</div>
+                            </div>
+
+                            <div class="mt-6 p-4 bg-white rounded-lg shadow-inner border border-[#ABDFF7]">
+                                <h4 class="font-bold mb-2 text-[#003F5C]">AI Learning Highlight Extractor</h4>
+                                <p class="text-sm text-[#366E8A] mb-3">Input lengthy reports or materials here, and AI instantly summarizes key findings for deeper understanding. Truly a "learning accelerator"!</p>
+                                <textarea id="llmInput" class="w-full p-2 border border-[#ABDFF7] rounded-md focus:outline-none focus:ring-2 focus:ring-[#67A5C3] mb-3 text-[#003F5C] bg-[#F2F8FB]" rows="6" placeholder="e.g., New exploration reports, excerpts from learning modules"></textarea>
+                                <button id="summarizeButton" class="w-full bg-[#67A5C3] hover:bg-[#366E8A] text-white font-bold py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center">
+                                    <span id="buttonText">Start AI Summarization ✨</span>
+                                    <div id="loadingSpinner" class="spinner ml-2 hidden"></div>
+                                </button>
+                                <div class="mt-4 p-3 bg-[#F2F8FB] border border-[#ABDFF7] rounded-md text-sm text-[#003F5C]" id="llmOutput">
+                                    <span class="pulse-dot">●</span> Summary results will appear here.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="pillar2-detail" class="light-panel rounded-lg shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <span class="section-title">Second Pillar: Individually Optimized Growth Paths 🚀</span>
+                    </div>
+                    <p class="text-lg text-[#366E8A] text-center mb-8 max-w-3xl mx-auto">
+                        Generating personalized growth paths tailored to each crew member's current mission phase. AI and human wisdom merge to maximize individual awakening and fulfillment.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <div class="space-y-6">
+                                <div class="flex items-start space-x-4 p-4 rounded-lg bg-white shadow-sm">
+                                    <span class="text-3xl mt-1 text-[#003F5C]">🧠</span>
+                                    <div>
+                                        <h3 class="font-bold text-[#003F5C]">Vision Discovery Course</h3>
+                                        <p class="text-sm text-[#366E8A]">Through meditation guidance and psychological workshops with AI bots and skilled facilitators, safely deepen introspection and discover your unique vision—a yet unseen possibility. It's like gaining a future compass!</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4 p-4 rounded-lg bg-white shadow-sm">
+                                    <span class="text-3xl mt-1 text-[#003F5C]">💪</span>
+                                    <div>
+                                        <h3 class="font-bold text-[#003F5C]">Action Habituation Course</h3>
+                                        <p class="text-sm text-[#366E8A]">Weekly reviews and planning with AI bots and expert operators. This powerfully supports your actions and ensures reliable course correction towards your goals. An astonishing automated support that makes "I can't stick with it" a thing of the past!</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4 p-4 rounded-lg bg-white shadow-sm">
+                                    <span class="text-3xl mt-1 text-[#003F5C]">🤖</span>
+                                    <div>
+                                        <h3 class="font-bold text-[#003F5C]">AI-Powered Business Building Course</h3>
+                                        <p class="text-sm text-[#366E8A]">Direct instruction from the Mentor on cutting-edge Google techniques from the U.S. Learn practical know-how for building side businesses and ventures leveraging AI, transforming your ideas into reality with astonishing speed.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="memberGoalsChart"></canvas>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-gray-500 mt-4">Estimated Crew Composition per Path</p>
+                </section>
+                
+                <section id="pillar3-detail" class="card-panel rounded-lg shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <span class="section-title">Third Pillar: Crew Collaboration Network 🌟</span>
+                    </div>
+                    <p class="text-lg text-white text-center mb-8 max-w-3xl mx-auto">
+                        Where all crew members' visions intersect, fostering mutual aid and elevation. The true value of "Star Ship Satori Institute" lies in this infinitely expanding collaboration network, embodying a fulfilled future society where saying "Help me" is natural.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                        <div class="light-panel rounded-lg p-6 h-full shadow-md">
+                            <h3 class="text-xl font-bold mb-4 text-center text-[#003F5C]">Future Vision Map & Connection Visualization</h3>
+                            <p class="text-sm mb-6 text-[#366E8A] text-center">Visualize individual visions on a map, expanding the halo of empathy and cooperation.</p>
+                            <div class="relative w-full h-48 bg-white rounded-lg p-4 flex items-center justify-center border border-[#ABDFF7]">
+                                <div class="absolute top-4 left-4 p-2 bg-[#ABDFF7] rounded-full text-xs text-[#003F5C] font-bold">You</div>
+                                <div class="absolute top-12 right-8 p-2 bg-[#67A5C3] rounded-full text-xs text-white">Crew A</div>
+                                <div class="absolute bottom-4 left-16 p-2 bg-[#67A5C3] rounded-full text-xs text-white">Crew B</div>
+                                <div class="absolute bottom-10 right-2 p-2 bg-[#67A5C3] rounded-full text-xs text-white">Crew C</div>
+                                <div class="absolute top-1/2 left-1/2 w-0.5 h-12 bg-[#67A5C3] transform -translate-x-1/2 -translate-y-1/2 rotate-45"></div>
+                                <div class="absolute top-1/2 left-1/2 w-0.5 h-16 bg-[#67A5C3] transform -translate-x-1/2 -translate-y-1/2 -rotate-30"></div>
+                                <div class="absolute top-1/2 left-1/2 w-0.5 h-20 bg-[#67A5C3] transform -translate-x-1/2 -translate-y-1/2 rotate-120"></div>
+                                <p class="text-center text-xs text-[#003F5C] mt-2">Visualize star connections<br>with Google My Maps</p>
+                            </div>
+                             <p class="text-sm text-[#366E8A] text-center mt-4">AI analyzes keywords from each vision, automatically suggesting resonant peers. Discover astonishing connections you never knew existed!</p>
+                        </div>
+                        <div class="light-panel rounded-lg p-6 h-full shadow-md">
+                           <h3 class="text-xl font-bold mb-4 text-center text-[#003F5C]">Specialized Theme Communication Channels</h3>
+                           <p class="text-sm mb-6 text-[#366E8A] text-center">Engage in deep discussions on specialized themes in Google Chat Spaces. AI automatically analyzes channel activity and psychological safety, promoting optimal communication.</p>
+                           <div class="chart-container h-48">
+                                <canvas id="chatSpacesChart"></canvas>
+                           </div>
+                            <p class="text-sm text-[#366E8A] text-center mt-4">AI analyzes conversation tone, supporting more constructive discussions. "Suddenly, you realize you have the best authentic friends here."</p>
+                        </div>
+                    </div>
+                     <div class="light-panel rounded-lg p-6 mt-8 shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-center text-[#003F5C]">Smart Matching Support</h3>
+                        <p class="text-sm mb-6 text-[#366E8A] text-center">Requests for "help" connect to optimal light-speed assistance from AI and fellow crew members.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                            <div class="bg-white p-3 rounded-md shadow-sm text-[#003F5C]">SOS Broadcast (Special Command)</div>
+                            <div class="bg-white p-3 rounded-md shadow-sm text-[#003F5C]">AI provides instant situation assessment</div>
+                            <div class="bg-white p-3 rounded-md shadow-sm text-[#003F5C]">Optimal Crew Auto-Summon</div>
+                        </div>
+                        <p class="text-sm text-[#366E8A] text-center mt-4">Your contributions are automatically visualized, and mutual aid is returned to community prosperity. Experience the "joy of relying on others, and the joy of being relied upon"!</p>
+                    </div>
+                </section>
+
+                <section id="ai-navigation" class="light-panel rounded-lg shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <span class="section-title">AI Intelligence Core: Awaken Your Inner Potential 🧭</span>
+                    </div>
+                    <p class="text-lg text-[#366E8A] text-center mb-8 max-w-3xl mx-auto">
+                        Embedded deep within "Star Ship Satori Institute," the AI Intelligence Core acts as an invisible "stratum," working on your words, experiences, and the rhythm of your innermost heart to quietly yet powerfully awaken your inner potential. Before you know it, infinite possibilities will blossom.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-[#ABDFF7]">
+                            <h3 class="font-bold text-xl mb-3 text-[#003F5C]">Thought Expansion Core: AI Insight Engine</h3>
+                            <p class="text-sm text-[#366E8A] mb-4">The Mentor's deep insights and an advanced knowledge base deciphering the essence of language powerfully support your thinking. AI interprets your language patterns, guiding you to fundamental possibilities. It's like having your thoughts' "DNA" deciphered!</p>
+                            <ul class="list-disc list-inside text-sm text-[#366E8A] space-y-1">
+                                <li>Multi-dimensional Thought Prompts: AI presents questions from different perspectives ("fact," "possibility," "choice") to infinitely expand your ideas.</li>
+                                <li>Logical Action Mapping: An AI support system that structures your thoughts towards goal achievement, making action plans astonishingly clear.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-[#ABDFF7]">
+                            <h3 class="font-bold text-xl mb-3 text-[#003F5C]">Personal Awakening Profiler: Visualizing Inner Talents ✨</h3>
+                            <p class="text-sm text-[#366E8A] mb-3">Based on your community activities and language tendencies, AI deeply analyzes your inner talents and potential using unique algorithms. It visualizes your "true strengths" and "optimal growth paths" that you may not yet realize, offering astonishing insights as if you're conversing with your future self. Now, nothing can hold back your potential!</p>
+                            <textarea id="profilerInput" class="w-full p-2 border border-[#ABDFF7] rounded-md focus:outline-none focus:ring-2 focus:ring-[#67A5C3] mb-3 text-[#003F5C] bg-[#F2F8FB]" rows="4" placeholder="e.g., Describe recent impactful activities, feelings, or common language patterns."></textarea>
+                            <button id="profilerButton" class="w-full bg-[#67A5C3] hover:bg-[#366E8A] text-white font-bold py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center">
+                                <span id="profilerButtonText">Profile My Talents ✨</span>
+                                <div id="profilerSpinner" class="spinner ml-2 hidden"></div>
+                            </button>
+                            <div class="mt-4 p-3 bg-[#F2F8FB] border border-[#ABDFF7] rounded-md text-sm text-[#003F5C]" id="profilerOutput">
+                                <span class="pulse-dot">●</span> Your potential talent profile will appear here.
+                            </div>
+
+                            <h3 class="font-bold text-xl mb-3 text-[#003F5C] mt-6">Consciousness Transformation Assistant: Your Heart's Compass ✨</h3>
+                            <p class="text-sm text-[#366E8A] mb-4">An AI module designed to promote individual inner transformation.</p>
+                            <ul class="list-disc list-inside text-sm text-[#366E8A] space-y-1">
+                                <li>Real-time Thought Feedback: AI automatically color-codes language patterns (e.g., generalization, omissions, distortions) in conversations, fostering deep self-awareness and awakening to more authentic communication.</li>
+                                <li>Body-Sense Link Support: Estimates emotional tendencies from vocal intonation, prompting deep breathing or relaxation. For volunteers, it integrates with wearable devices for personalized advice based on emotional state.</li>
+                                <li>Dream Realization Navigator: Input an impressive scene from your day before sleep, and AI returns symbolic interpretations and future-oriented insights the next morning. Supports awakening at the subconscious level.</li>
+                            </ul>
+                            <textarea id="dreamInput" class="w-full p-2 border border-[#ABDFF7] rounded-md focus:outline-none focus:ring-2 focus:ring-[#67A5C3] mb-3 text-[#003F5C] bg-[#F2F8FB]" rows="2" placeholder="e.g., A vivid dream or a recent impactful scene"></textarea>
+                            <button id="dreamButton" class="w-full bg-[#67A5C3] hover:bg-[#366E8A] text-white font-bold py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center">
+                                <span id="dreamButtonText">Analyze My Dream ✨</span>
+                                <div id="dreamSpinner" class="spinner ml-2 hidden"></div>
+                            </button>
+                            <div class="mt-4 p-3 bg-[#F2F8FB] border border-[#ABDFF7] rounded-md text-sm text-[#003F5C]" id="dreamOutput">
+                                <span class="pulse-dot">●</span> Your dream analysis will appear here.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="sustaining-journey" class="card-panel rounded-lg shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <span class="section-title">Sustainable Growth & Autonomy: The Future of Our Community ✨</span>
+                    </div>
+                    <p class="text-lg text-white text-center mb-8 max-w-3xl mx-auto">
+                        For "Star Ship Satori Institute" to navigate the future indefinitely, a mechanism to maintain the entire crew's energy and enable autonomous navigation is essential. We will establish a "Cycle of Fulfillment" and "Decentralized Governance" to become a continuously evolving organism.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                        <div class="light-panel rounded-lg p-6 h-full shadow-md">
+                            <h3 class="font-bold text-xl mb-3 text-[#003F5C]">Energy Charge Cycle: Loop of Fulfillment</h3>
+                            <ul class="list-disc list-inside text-sm text-[#366E8A] space-y-2">
+                                <li>Growth Quests & Digital Badges: Visualize small successes and contributions, encouraging continuation through gamification. Your heart will be filled with joy as your badges grow!</li>
+                                <li>"Silent to Spotlight": AI detects quiet crew members and highlights them weekly, encouraging them to speak up. "Your voice moves the community!"</li>
+                                <li>Gratitude → Contribution Loop: Visualization of gratitude leads to further contributions in a positive cycle. A place where everyone experiences the "joy of giving."</li>
+                                <li>Resonance Breathing Sessions: Once a week, AI plays soothing sounds and positive affirmations, harmonizing the consciousness and vitality of the entire community.</li>
+                                <li>Awakening Showcase: Quarterly presentations to celebrate achievements and growth. Your brilliance will inspire infinite possibilities in your fellow crew.</li>
+                            </ul>
+                        </div>
+                        <div class="light-panel rounded-lg p-6 h-full shadow-md">
+                            <h3 class="font-bold text-xl mb-3 text-[#003F5C]">Autonomous Navigation System: Decentralized Governance</h3>
+                            <ul class="list-disc list-inside text-sm text-[#366E8A] space-y-2">
+                                <li>Rotation Leadership: Decision-making power rotates among multiple crew members, decentralizing leadership and enabling anyone to participate in governance.</li>
+                                <li>Automated Operations Playbook: AI automatically records and updates operational procedures and know-how, preventing knowledge silos. Like a living instruction manual!</li>
+                                <li>Role-based AI Support: AI handles back-office tasks like moderating and archiving, allowing humans to focus on more creative and essential activities. With AI as the "shadow commander," operations become astonishingly smooth.</li>
+                                <li>Emergency Protocol: In case of community vitality decline or emergencies, AI automatically detects and swiftly alerts the optimal crew or mentors. A robust crisis management system.</li>
+                                <li>Technology Sabbath Week: Once a quarter, AI intervention is minimized, with a focus on paper workbooks and face-to-face dialogue. Step away from technology to deepen your connection with your authentic self.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+            
+            <footer class="text-center mt-20 md:mt-32 pt-8 border-t-2 border-[#67A5C3] space-bg p-8 rounded-lg shadow-xl">
+                 <p class="text-xl text-[#ABDFF7] mb-4">Star Ship Satori Institute awaits your participation in this new future!</p>
+                 <p class="text-base text-white">In this community where "help me" resonates and the light of "fulfillment" abounds, let's explore uncharted territories together and weave the future of Earth.</p>
+                 <p class="text-sm text-[#67A5C3] mt-4">With immense gratitude for your leadership and vision, Chris Monsen, Navigator Rikki, and the entire AI Crew.</p>
+                 <p class="text-sm text-[#67A5C3] mt-2">Thank you, Chris, for your invaluable inspiration and guidance!</p>
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+        const wrapLabel = (label, maxWidth) => {
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + ' ' + words[i]).length > maxWidth) {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                } else {
+                    currentLine += ' ' + words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+        
+        const chartPlugins = {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    color: '#F2F8FB',
+                    font: {
+                        family: "'Inter', sans-serif"
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    title: tooltipTitleCallback
+                },
+                bodyFont: {
+                    family: "'Inter', sans-serif"
+                },
+                titleFont: {
+                    family: "'Inter', sans-serif"
+                }
+            }
+        };
+        
+        const chartScales = {
+            y: {
+                beginAtZero: true,
+                ticks: { color: '#F2F8FB' },
+                grid: { color: '#67A5C3' }
+            },
+            x: {
+                ticks: { color: '#F2F8FB' },
+                grid: { display: false }
+            }
+        };
+        
+        const memberGoalsCtx = document.getElementById('memberGoalsChart');
+        if (memberGoalsCtx) {
+            new Chart(memberGoalsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Vision Discovery Course', 'Action Habituation Course', 'AI-Powered Business Building Course'],
+                    datasets: [{
+                        label: 'Crew Composition',
+                        data: [10, 70, 20],
+                        backgroundColor: ['#ABDFF7', '#67A5C3', '#366E8A'],
+                        borderColor: '#003F5C',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: chartPlugins
+                }
+            });
+        }
+        
+        const chatSpacesCtx = document.getElementById('chatSpacesChart');
+        if (chatSpacesCtx) {
+            new Chart(chatSpacesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['AI Exploration', 'Space Biz Strategy', 'Self-Awakening Nav', 'Interstellar Lounge'],
+                    datasets: [{
+                        label: 'Communication Log Frequency',
+                        data: [85, 65, 72, 95],
+                        backgroundColor: '#ABDFF7',
+                        borderColor: '#67A5C3',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: chartPlugins,
+                    scales: {
+                        y: {
+                            ticks: { color: '#F2F8FB' },
+                            grid: { display: false }
+                        },
+                        x: {
+                           ticks: { color: '#F2F8FB' },
+                           grid: { color: '#67A5C3' }
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const llmInput = document.getElementById('llmInput');
+            const summarizeButton = document.getElementById('summarizeButton');
+            const llmOutput = document.getElementById('llmOutput');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const buttonText = document.getElementById('buttonText');
+
+            const profilerInput = document.getElementById('profilerInput');
+            const profilerButton = document.getElementById('profilerButton');
+            const profilerOutput = document.getElementById('profilerOutput');
+            const profilerSpinner = document.getElementById('profilerSpinner');
+            const profilerButtonText = document.getElementById('profilerButtonText');
+
+            const dreamInput = document.getElementById('dreamInput');
+            const dreamButton = document.getElementById('dreamButton');
+            const dreamOutput = document.getElementById('dreamOutput');
+            const dreamSpinner = document.getElementById('dreamSpinner');
+            const dreamButtonText = document.getElementById('dreamButtonText');
+
+
+            if (summarizeButton) {
+                summarizeButton.addEventListener('click', async () => {
+                    const textToSummarize = llmInput.value.trim();
+                    if (!textToSummarize) {
+                        llmOutput.innerHTML = '<span class="text-red-500">Please enter exploration report to summarize.</span>';
+                        return;
+                    }
+
+                    buttonText.textContent = 'Engaging Warp Drive...';
+                    loadingSpinner.classList.remove('hidden');
+                    summarizeButton.disabled = true;
+                    llmOutput.innerHTML = '<span class="pulse-dot">●</span> Analyzing Logbook...';
+
+                    try {
+                        let chatHistory = [];
+                        const prompt = `Summarize the main points of the following text in English:\n\nText:\n"${textToSummarize}"`;
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                        const payload = { contents: chatHistory };
+                        const apiKey = "";
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const summaryText = result.candidates[0].content.parts[0].text;
+                            llmOutput.innerHTML = `<span class="font-bold">Analysis Complete!</span><br>${summaryText}`;
+                        } else {
+                            llmOutput.innerHTML = '<span class="text-red-500">Failed to analyze exploration data. Please try again.</span>';
+                        }
+                    } catch (error) {
+                        llmOutput.innerHTML = `<span class="text-red-500">Warp Drive Anomaly: ${error.message}</span>`;
+                    } finally {
+                        buttonText.textContent = 'Start AI Summarization ✨';
+                        loadingSpinner.classList.add('hidden');
+                        summarizeButton.disabled = false;
+                    }
+                });
+            }
+
+            // Personal Awakening Profiler functionality
+            if (profilerButton) {
+                profilerButton.addEventListener('click', async () => {
+                    const profilerText = profilerInput.value.trim();
+                    if (!profilerText) {
+                        profilerOutput.innerHTML = '<span class="text-red-500">Please enter your information (activities, language tendencies).</span>';
+                        return;
+                    }
+
+                    profilerButtonText.textContent = 'Profiling...';
+                    profilerSpinner.classList.remove('hidden');
+                    profilerButton.disabled = true;
+                    profilerOutput.innerHTML = '<span class="pulse-dot">●</span> Analyzing potential...';
+
+                    try {
+                        let chatHistory = [];
+                        const prompt = `Based on the following information, analyze this person's inner talents and potential, and suggest future-oriented insights in inspiring language:\n\nInformation:\n"${profilerText}"`;
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                        const payload = { contents: chatHistory };
+                        const apiKey = "";
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const insights = result.candidates[0].content.parts[0].text;
+                            profilerOutput.innerHTML = `<span class="font-bold">Profile Complete!</span><br>${insights}`;
+                        } else {
+                            profilerOutput.innerHTML = '<span class="text-red-500">Analysis failed. Please try again.</span>';
+                        }
+                    } catch (error) {
+                        profilerOutput.innerHTML = `<span class="text-red-500">Error: ${error.message}</span>`;
+                    } finally {
+                        profilerButtonText.textContent = 'Profile My Talents ✨';
+                        profilerSpinner.classList.add('hidden');
+                        profilerButton.disabled = false;
+                    }
+                });
+            }
+
+            // Dream Realization Navigator functionality
+            if (dreamButton) {
+                dreamButton.addEventListener('click', async () => {
+                    const dreamText = dreamInput.value.trim();
+                    if (!dreamText) {
+                        dreamOutput.innerHTML = '<span class="text-red-500">Please enter an impressive scene or dream content.</span>';
+                        return;
+                    }
+
+                    dreamButtonText.textContent = 'Analyzing...';
+                    dreamSpinner.classList.remove('hidden');
+                    dreamButton.disabled = true;
+                    dreamOutput.innerHTML = '<span class="pulse-dot">●</span> Exploring dream depths...';
+
+                    try {
+                        let chatHistory = [];
+                        const prompt = `Interpret the symbolic meaning of the following impressive scene or dream content, and suggest concrete, future-oriented insights and tips on how it connects to inner awakening. Summarize positively and with action-oriented language:\n\nContent:\n"${dreamText}"`;
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                        const payload = { contents: chatHistory };
+                        const apiKey = "";
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const interpretation = result.candidates[0].content.parts[0].text;
+                            dreamOutput.innerHTML = `<span class="font-bold">Analysis Complete!</span><br>${interpretation}`;
+                        } else {
+                            dreamOutput.innerHTML = '<span class="text-red-500">Analysis failed. Please try again.</span>';
+                        }
+                    } catch (error) {
+                        dreamOutput.innerHTML = `<span class="text-red-500">Error: ${error.message}</span>`;
+                    } finally {
+                        dreamButtonText.textContent = 'Analyze My Dream ✨';
+                        dreamSpinner.classList.add('hidden');
+                        dreamButton.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
