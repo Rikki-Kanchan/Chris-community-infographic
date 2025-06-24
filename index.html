@@ -292,15 +292,32 @@
                             </ul>
                         </div>
                         <div class="bg-white rounded-lg p-6 shadow-sm border border-[#ABDFF7]">
-                            <h3 class="font-bold text-xl mb-3 text-[#003F5C]">パーソナル覚醒プロファイラー：内なる才能の可視化</h3>
-                            <p class="text-sm text-[#366E8A] mb-4">これは、あなたのコミュニティでの活動や言葉の傾向から、AIが独自のアルゴリズムであなたの内なる才能や潜在的な可能性を深く分析します。あなたがまだ気づいていない「本当の強み」や「最適な成長ルート」を可視化し、まるで未来の自分と対話するような、驚くべきインサイトを提供します。これでもう、あなたの可能性に蓋をするものは何もありません！</p>
-                            <h3 class="font-bold text-xl mb-3 text-[#003F5C] mt-6">意識変容アシスタント：あなたの心の羅針盤</h3>
+                            <h3 class="font-bold text-xl mb-3 text-[#003F5C]">パーソナル覚醒プロファイラー：内なる才能の可視化 ✨</h3>
+                            <p class="text-sm text-[#366E8A] mb-3">あなたのコミュニティでの活動や言葉の傾向から、AIが独自のアルゴリズムであなたの内なる才能や潜在的な可能性を深く分析します。あなたがまだ気づいていない「本当の強み」や「最適な成長ルート」を可視化し、まるで未来の自分と対話するような、驚くべきインサイトを提供します。これでもう、あなたの可能性に蓋をするものは何もありません！</p>
+                            <textarea id="profilerInput" class="w-full p-2 border border-[#ABDFF7] rounded-md focus:outline-none focus:ring-2 focus:ring-[#67A5C3] mb-3 text-[#003F5C] bg-[#F2F8FB]" rows="4" placeholder="例：最近の活動で特に印象的だったことや、感じていること、よく使う言葉の傾向などを入力してください。"></textarea>
+                            <button id="profilerButton" class="w-full bg-[#67A5C3] hover:bg-[#366E8A] text-white font-bold py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center">
+                                <span id="profilerButtonText">才能をプロファイルする ✨</span>
+                                <div id="profilerSpinner" class="spinner ml-2 hidden"></div>
+                            </button>
+                            <div class="mt-4 p-3 bg-[#F2F8FB] border border-[#ABDFF7] rounded-md text-sm text-[#003F5C]" id="profilerOutput">
+                                <span class="pulse-dot">●</span> ここにあなたの潜在能力プロファイルが表示されます。
+                            </div>
+
+                            <h3 class="font-bold text-xl mb-3 text-[#003F5C] mt-6">意識変容アシスタント：あなたの心の羅針盤 ✨</h3>
                             <p class="text-sm text-[#366E8A] mb-4">個々の内なる変容を促すAIモジュール。</p>
                             <ul class="list-disc list-inside text-sm text-[#366E8A] space-y-1">
                                 <li>リアルタイム思考フィードバック: 会話中の言葉のパターン（表現の一般化、情報の欠落、解釈の歪みなど）をAIが自動で色分け表示し、深い自己認識と、より本質的なコミュニケーションへの覚醒を促します。</li>
                                 <li>身体感覚連動サポート: 音声の抑揚から感情の傾向を推定し、深呼吸やリラックスを促す。希望者にはウェアラブルデバイスと連携し、心の状態に合わせた最適なアドバイスを提示。</li>
                                 <li>夢の実現ナビゲーター: 就寝前にその日の印象的なシーンを一行入力すると、翌朝AIが象徴的な意味と未来志向のヒントを返送。潜在意識レベルでの覚醒をサポートします。</li>
                             </ul>
+                            <textarea id="dreamInput" class="w-full p-2 border border-[#ABDFF7] rounded-md focus:outline-none focus:ring-2 focus:ring-[#67A5C3] mb-3 text-[#003F5C] bg-[#F2F8FB]" rows="2" placeholder="例：印象的な夢の内容や、最近心に残ったシーン"></textarea>
+                            <button id="dreamButton" class="w-full bg-[#67A5C3] hover:bg-[#366E8A] text-white font-bold py-2 px-4 rounded-md transition-colors duration-200 flex items-center justify-center">
+                                <span id="dreamButtonText">夢を解析する ✨</span>
+                                <div id="dreamSpinner" class="spinner ml-2 hidden"></div>
+                            </button>
+                            <div class="mt-4 p-3 bg-[#F2F8FB] border border-[#ABDFF7] rounded-md text-sm text-[#003F5C]" id="dreamOutput">
+                                <span class="pulse-dot">●</span> ここに夢の解析結果が表示されます。
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -473,6 +490,19 @@
             const loadingSpinner = document.getElementById('loadingSpinner');
             const buttonText = document.getElementById('buttonText');
 
+            const profilerInput = document.getElementById('profilerInput');
+            const profilerButton = document.getElementById('profilerButton');
+            const profilerOutput = document.getElementById('profilerOutput');
+            const profilerSpinner = document.getElementById('profilerSpinner');
+            const profilerButtonText = document.getElementById('profilerButtonText');
+
+            const dreamInput = document.getElementById('dreamInput');
+            const dreamButton = document.getElementById('dreamButton');
+            const dreamOutput = document.getElementById('dreamOutput');
+            const dreamSpinner = document.getElementById('dreamSpinner');
+            const dreamButtonText = document.getElementById('dreamButtonText');
+
+
             if (summarizeButton) {
                 summarizeButton.addEventListener('click', async () => {
                     const textToSummarize = llmInput.value.trim();
@@ -518,7 +548,102 @@
                     }
                 });
             }
+
+            // パーソナル覚醒プロファイラー機能
+            if (profilerButton) {
+                profilerButton.addEventListener('click', async () => {
+                    const profilerText = profilerInput.value.trim();
+                    if (!profilerText) {
+                        profilerOutput.innerHTML = '<span class="text-red-500">あなたの情報（活動や言葉の傾向）を入力してください。</span>';
+                        return;
+                    }
+
+                    profilerButtonText.textContent = 'プロファイル中...';
+                    profilerSpinner.classList.remove('hidden');
+                    profilerButton.disabled = true;
+                    profilerOutput.innerHTML = '<span class="pulse-dot">●</span> 潜在能力を分析中...';
+
+                    try {
+                        let chatHistory = [];
+                        const prompt = `以下の情報に基づいて、この人物の内なる才能や潜在的な可能性、最適な成長ルートについて分析し、未来志向のインサイトを魅力的な言葉で提案してください。\n\n情報:\n"${profilerText}"`;
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                        const payload = { contents: chatHistory };
+                        const apiKey = "";
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const insights = result.candidates[0].content.parts[0].text;
+                            profilerOutput.innerHTML = `<span class="font-bold">プロファイル完了！</span><br>${insights}`;
+                        } else {
+                            profilerOutput.innerHTML = '<span class="text-red-500">分析に失敗しました。もう一度お試しください。</span>';
+                        }
+                    } catch (error) {
+                        profilerOutput.innerHTML = `<span class="text-red-500">エラー発生: ${error.message}</span>`;
+                    } finally {
+                        profilerButtonText.textContent = '才能をプロファイルする ✨';
+                        profilerSpinner.classList.add('hidden');
+                        profilerButton.disabled = false;
+                    }
+                });
+            }
+
+            // 夢の実現ナビゲーター機能
+            if (dreamButton) {
+                dreamButton.addEventListener('click', async () => {
+                    const dreamText = dreamInput.value.trim();
+                    if (!dreamText) {
+                        dreamOutput.innerHTML = '<span class="text-red-500">印象的なシーンや夢の内容を入力してください。</span>';
+                        return;
+                    }
+
+                    dreamButtonText.textContent = '解析中...';
+                    dreamSpinner.classList.remove('hidden');
+                    dreamButton.disabled = true;
+                    dreamOutput.innerHTML = '<span class="pulse-dot">●</span> 夢の深層を探索中...';
+
+                    try {
+                        let chatHistory = [];
+                        const prompt = `以下の印象的なシーンや夢の内容について、象徴的な意味を解釈し、それが未来志向の行動や内なる覚醒にどう繋がるかのヒントを具体的に提案してください。ポジティブな視点で解釈し、行動を促す言葉でまとめてください。\n\n内容:\n"${dreamText}"`;
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                        const payload = { contents: chatHistory };
+                        const apiKey = "";
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const interpretation = result.candidates[0].content.parts[0].text;
+                            dreamOutput.innerHTML = `<span class="font-bold">解析完了！</span><br>${interpretation}`;
+                        } else {
+                            dreamOutput.innerHTML = '<span class="text-red-500">解析に失敗しました。もう一度お試しください。</span>';
+                        }
+                    } catch (error) {
+                        dreamOutput.innerHTML = `<span class="text-red-500">エラー発生: ${error.message}</span>`;
+                    } finally {
+                        dreamButtonText.textContent = '夢を解析する ✨';
+                        dreamSpinner.classList.add('hidden');
+                        dreamButton.disabled = false;
+                    }
+                });
+            }
         });
     </script>
 </body>
 </html>
+
