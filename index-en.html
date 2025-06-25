@@ -83,6 +83,9 @@
             100% { transform: scale(0.8); opacity: 0.7; }
         }
     </style>
+    <!-- Cloudflare Web Analytics (Please replace with your actual script from Cloudflare) -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'></script>
+    <!-- End Cloudflare Web Analytics -->
 </head>
 <body class="text-[#003F5C]">
 
@@ -110,14 +113,29 @@
                     </p>
                 </div>
 
-                <div class="light-panel rounded-lg shadow-md p-6 max-w-3xl mx-auto border border-[#67A5C3]">
-                    <h2 class="text-2xl font-bold text-[#003F5C] mb-4">The 3 Core Pillars of Satori Neo Community</h2>
-                    <ul class="list-disc list-inside text-left text-[#366E8A] space-y-3">
-                        <li>First Pillar: Direct Connection with the Mentor<br>Sharing the navigational compass with the Commander's wisdom and direct/indirect feedback.</li>
-                        <li>Second Pillar: Individually Optimized Growth Paths<br>Generating personalized growth paths tailored to each crew member's mission phase.</li>
-                        <li>Third Pillar: Crew Collaboration Network<br>Visualizing the vision of all crew members and establishing a communication network for natural cooperation and resonance.</li>
-                    </ul>
+                <!-- Revised 3 Core Pillars section for better scannability -->
+                <div class="light-panel rounded-lg shadow-md p-6 max-w-4xl mx-auto border border-[#67A5C3]">
+                    <h2 class="text-2xl font-bold text-[#003F5C] mb-6">Satori Neo Community's 3 Core Pillars</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 shadow-sm flex flex-col items-center text-center">
+                            <span class="text-4xl text-[#003F5C] mb-2">📡</span>
+                            <h3 class="font-bold text-lg text-[#003F5C] mb-1">Direct Mentor Connection</h3>
+                            <p class="text-sm text-[#366E8A]">Sharing the navigational compass with the Commander's wisdom and direct/indirect feedback.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm flex flex-col items-center text-center">
+                            <span class="text-4xl text-[#003F5C] mb-2">🚀</span>
+                            <h3 class="font-bold text-lg text-[#003F5C] mb-1">Optimized Growth Paths</h3>
+                            <p class="text-sm text-[#366E8A]">Generating personalized growth paths tailored to each crew member's mission phase.</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm flex flex-col items-center text-center">
+                            <span class="text-4xl text-[#003F5C] mb-2">🌟</span>
+                            <h3 class="font-bold text-lg text-[#003F5C] mb-1">Crew Collaboration Network</h3>
+                            <p class="text-sm text-[#366E8A]">Visualizing all crew members' visions and establishing a network for natural cooperation and resonance.</p>
+                        </div>
+                    </div>
                 </div>
+                <!-- End Revised 3 Core Pillars section -->
+
             </header>
 
             <main class="space-y-20 md:space-y-32">
@@ -435,7 +453,7 @@
                     labels: ['Vision Discovery Course', 'Action Habituation Course', 'AI-Powered Business Building Course'],
                     datasets: [{
                         label: 'Crew Composition',
-                        data: [10, 70, 20],
+                        data: [10, 70, 20], /* Updated data for percentages */
                         backgroundColor: ['#ABDFF7', '#67A5C3', '#366E8A'],
                         borderColor: '#003F5C',
                         borderWidth: 2
@@ -458,7 +476,7 @@
                     datasets: [{
                         label: 'Communication Log Frequency',
                         data: [85, 65, 72, 95],
-                        backgroundColor: '#ABDFF7',
+                        backgroundColor: ['#ABDFF7', '#67A5C3', '#366E8A', '#ABDFF7'],
                         borderColor: '#67A5C3',
                         borderWidth: 1,
                         borderRadius: 5

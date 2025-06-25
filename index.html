@@ -83,10 +83,13 @@
             100% { transform: scale(0.8); opacity: 0.7; }
         }
     </style>
+    <!-- Cloudflare Web Analytics (Cloudflareから実際のスクリプトに置き換えてください) -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN"}'></script>
+    <!-- Cloudflare Web Analytics 終了 -->
 </head>
 <body class="text-[#003F5C]">
 
-    <!-- Outer neon-colored frame -->
+    <!-- 外側のネオンカラーフレーム -->
     <div class="border-8 border-[#ABDFF7] rounded-3xl shadow-xl shadow-[#ABDFF7]/50 p-4">
         <div class="container mx-auto p-4 md:p-8 max-w-6xl">
 
@@ -111,14 +114,29 @@
                     </p>
                 </div>
 
-                <div class="light-panel rounded-lg shadow-md p-6 max-w-3xl mx-auto border border-[#67A5C3]">
-                    <h2 class="text-2xl font-bold text-[#003F5C] mb-4">Satori Neo コミュニティの3つの核となる柱</h2>
-                    <ul class="list-disc list-inside text-left text-[#366E8A] space-y-3">
-                        <li>第一の柱：メンターとの直接的な繋がり<br>司令官の叡智と直接・間接的フィードバックで、航海の羅針盤を共有。</li>
-                        <li>第二の柱：個別最適化された成長パス<br>各クルーのミッションフェーズに合わせた、個別最適化された成長パスを生成。</li>
-                        <li>第三の柱：メンバー間の協働ネットワーク<br>全クルーのビジョンを可視化し、協力と共鳴が自然発生する通信網を構築。</li>
-                    </ul>
+                <!-- 3つの核となる柱セクションの改善 -->
+                <div class="light-panel rounded-lg shadow-md p-6 max-w-4xl mx-auto border border-[#67A5C3]">
+                    <h2 class="text-2xl font-bold text-[#003F5C] mb-6">Satori Neo コミュニティの3つの核となる柱</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 shadow-sm flex flex-col items-center text-center">
+                            <span class="text-4xl text-[#003F5C] mb-2">📡</span>
+                            <h3 class="font-bold text-lg text-[#003F5C] mb-1">メンターとの直接的な繋がり</h3>
+                            <p class="text-sm text-[#366E8A]">司令官の叡智と直接・間接的フィードバックで、航海の羅針盤を共有。</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm flex flex-col items-center text-center">
+                            <span class="text-4xl text-[#003F5C] mb-2">🚀</span>
+                            <h3 class="font-bold text-lg text-[#003F5C] mb-1">個別最適化された成長パス</h3>
+                            <p class="text-sm text-[#366E8A]">各クルーのミッションフェーズに合わせた、個別最適化された成長パスを生成。</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm flex flex-col items-center text-center">
+                            <span class="text-4xl text-[#003F5C] mb-2">🌟</span>
+                            <h3 class="font-bold text-lg text-[#003F5C] mb-1">メンバー間の協働ネットワーク</h3>
+                            <p class="text-sm text-[#366E8A]">全クルーのビジョンを可視化し、協力と共鳴が自然発生する通信網を構築。</p>
+                        </div>
+                    </div>
                 </div>
+                <!-- 3つの核となる柱セクションの改善 終了 -->
+
             </header>
 
             <main class="space-y-20 md:space-y-32">
@@ -454,11 +472,11 @@
             new Chart(chatSpacesCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['AI活用探索', '宇宙ビジネス戦略', '自己覚醒航法', '星間交流室'],
+                    labels: ['AI活用探索', '宇宙ビジネス戦略', '自己覚醒航法', '星間交流室'], /* Updated labels for Japanese near-future theme */
                     datasets: [{
                         label: '通信ログ頻度',
                         data: [85, 65, 72, 95],
-                        backgroundColor: '#ABDFF7',
+                        backgroundColor: ['#ABDFF7', '#67A5C3', '#366E8A', '#ABDFF7'], /* Adjusted colors for clarity */
                         borderColor: '#67A5C3',
                         borderWidth: 1,
                         borderRadius: 5
@@ -519,8 +537,7 @@
                     try {
                         let chatHistory = [];
                         const prompt = `以下のテキストの主要なポイントを日本語で要約してください。\n\nテキスト:\n"${textToSummarize}"`;
-                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                        const payload = { contents: chatHistory };
+                        const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
                         const apiKey = "";
                         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
@@ -566,8 +583,7 @@
                     try {
                         let chatHistory = [];
                         const prompt = `以下の情報に基づいて、この人物の内なる才能や潜在的な可能性、最適な成長ルートについて分析し、未来志向のインサイトを魅力的な言葉で提案してください。\n\n情報:\n"${profilerText}"`;
-                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                        const payload = { contents: chatHistory };
+                        const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
                         const apiKey = "";
                         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
@@ -601,7 +617,7 @@
                 dreamButton.addEventListener('click', async () => {
                     const dreamText = dreamInput.value.trim();
                     if (!dreamText) {
-                        dreamOutput.innerHTML = '<span class="text-red-500">印象的なシーンや夢の内容を入力してください。</span>';
+                        dreamOutput.innerHTML = '<span class="text-red-500">印象的な夢の内容や、最近心に残ったシーンを入力してください。</span>';
                         return;
                     }
 
@@ -613,8 +629,7 @@
                     try {
                         let chatHistory = [];
                         const prompt = `以下の印象的なシーンや夢の内容について、象徴的な意味を解釈し、それが未来志向の行動や内なる覚醒にどう繋がるかのヒントを具体的に提案してください。ポジティブな視点で解釈し、行動を促す言葉でまとめてください。\n\n内容:\n"${dreamText}"`;
-                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                        const payload = { contents: chatHistory };
+                        const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
                         const apiKey = "";
                         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
@@ -646,4 +661,5 @@
     </script>
 </body>
 </html>
+
 
