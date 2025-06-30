@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chris Community Neo: Galactic Blueprint (Final)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #000;
+            color: #e5e7eb; /* text-gray-200 */
+        }
+        
+        /* Starfield Background */
+        .stars, .stars2, .stars3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: transparent;
+        }
+        .stars {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: zoom 15s infinite;
+            opacity: 0.8;
+        }
+        .stars2 {
+            background-image: 
+                radial-gradient(1px 1px at 10px 90px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 70px 20px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 20px 130px, #ddd, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 300px 300px;
+            animation: zoom 21s infinite;
+        }
+        .stars3 {
+             background-image: 
+                radial-gradient(1px 1px at 80px 50px, #eee, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 150px 180px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 400px 400px;
+            animation: zoom 27s infinite;
+        }
+
+        @keyframes zoom {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .glass-card {
+            background: rgba(17, 24, 39, 0.4); /* bg-gray-900/40 */
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(66, 153, 225, 0.3); /* border-blue-400/30 */
+            border-radius: 1.5rem; /* rounded-3xl */
+            padding: 2rem; /* p-8 */
+            box-shadow: 0 0 15px rgba(77, 166, 255, 0.3), inset 0 0 5px rgba(77, 166, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            background: rgba(17, 24, 39, 0.5);
+            border-color: rgba(66, 153, 225, 0.5); /* border-blue-400/50 */
+            box-shadow: 0 0 25px rgba(77, 166, 255, 0.5);
+        }
+        
+        .timeline-container {
+            position: relative; max-width: 1000px; margin: 0 auto;
+        }
+        .timeline-container::after {
+            content: ''; position: absolute; width: 6px;
+            background: linear-gradient(to bottom, rgba(77, 166, 255, 0), rgba(77, 166, 255, 0.5), rgba(77, 166, 255, 0));
+            top: 0; bottom: 0; left: 50%; margin-left: -3px;
+        }
+        .timeline-item { padding: 10px 40px; position: relative; width: 50%; }
+        .timeline-item::after {
+            content: ''; position: absolute; width: 25px; height: 25px; right: -17px;
+            background-color: #000; border: 4px solid #4a90e2; top: 25px; border-radius: 50%;
+            z-index: 1; box-shadow: 0 0 10px #4a90e2;
+        }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-item.right::after { left: -16px; }
+        
+        @media screen and (max-width: 768px) {
+            .timeline-container::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 15px; }
+            .timeline-item.right { left: 0%; }
+        }
+        
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="{ lang: 'ja' }">
+    <div class="relative min-h-screen">
+        <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+            <div class="stars"></div>
+            <div class="stars2"></div>
+            <div class="stars3"></div>
+        </div>
+
+        <header class="sticky top-0 z-50 bg-black/50 backdrop-blur-lg border-b border-blue-500/20">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-white tracking-widest">Chris Community Neo</h1>
+                    <p class="text-sm text-blue-300/70">Galactic Blueprint</p>
+                </div>
+                <!-- Language Switcher -->
+                <div class="flex space-x-2 bg-black/30 border border-blue-500/20 rounded-full p-1">
+                    <button @click="lang = 'ja'" :class="{ 'bg-blue-500 text-white': lang === 'ja', 'text-gray-400': lang !== 'ja' }" class="px-3 py-1 text-sm font-semibold rounded-full transition-colors">JA</button>
+                    <button @click="lang = 'en'" :class="{ 'bg-blue-500 text-white': lang === 'en', 'text-gray-400': lang !== 'en' }" class="px-3 py-1 text-sm font-semibold rounded-full transition-colors">EN</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="relative z-10 container mx-auto px-6 py-12">
+            <!-- Hero -->
+            <section class="text-center py-20">
+                <h2 class="text-5xl md:text-7xl font-extrabold text-white leading-tight">
+                    <span x-show="lang === 'ja'"><span class="text-blue-300">混沌</span>から<span class="text-green-300">秩序</span>へ そして<span class="text-yellow-300">覚醒</span>へ</span>
+                    <span x-show="lang === 'en'" x-cloak><span class="text-blue-300">From Chaos</span> to <span class="text-green-300">Order</span> And to <span class="text-yellow-300">Awakening</span></span>
+                </h2>
+                <p class="mt-8 max-w-4xl mx-auto text-lg text-gray-400">
+                    <span x-show="lang === 'ja'">分断されたツールがもたらす情報のカオスを シームレスに連携するGoogleエコシステムによる創造のコスモスへと変革する その先に 個人と地球 そして銀河の覚醒が待っている</span>
+                    <span x-show="lang === 'en'" x-cloak>Transforming the information chaos of fragmented tools into a creative cosmos with a seamlessly integrated Google ecosystem. Beyond this lies the awakening of individuals the Earth and the galaxy.</span>
+                </p>
+            </section>
+            
+            <!-- The Great Migration Section -->
+            <section class="py-12">
+                <h2 class="text-center text-4xl md:text-5xl font-bold text-white mb-12 tracking-wider">
+                    <span x-show="lang === 'ja'">新たなる神殿への移行</span>
+                    <span x-show="lang === 'en'" x-cloak>Migration to the New Temple</span>
+                </h2>
+                <div class="glass-card">
+                    <p class="text-center text-lg text-gray-300 mb-8">
+                        <span x-show="lang === 'ja'">クリスが10年間築き上げた大切な場所 その学びの体験はそのままに コミュニケーションの場をアップグレードします これは大きな変化へのショックを和らげ 移行の旅すら楽しむための「おもてなし」の設計図です</span>
+                        <span x-show="lang === 'en'" x-cloak>The precious space Chris has built over 10 years. While keeping the learning experience intact we are upgrading our communication platforms. This is a blueprint of "omotenashi" (hospitality) designed to soften the shock of a big change and to make the migration journey itself enjoyable.</span>
+                    </p>
+                    <div class="flex flex-col space-y-8">
+                        <!-- Kajabi -->
+                        <div class="p-6 border border-gray-500/30 rounded-2xl text-center">
+                            <h3 class="font-bold text-xl text-white mb-2">学びの神殿 (オンラインコース)</h3>
+                            <p class="p-3 bg-black/20 rounded-lg text-gray-300"><strong>Kajabi</strong>: <span x-show="lang==='ja'">変更ありません 安心して学びを継続できます</span><span x-show="lang==='en'" x-cloak>No Changes. You can continue learning with peace of mind.</span></p>
+                        </div>
+                        <div class="text-center">
+                            <i data-lucide="plus" class="h-8 w-8 text-yellow-400 mx-auto"></i>
+                        </div>
+                        <!-- Google -->
+                        <div class="p-6 border border-green-500/30 rounded-2xl text-center">
+                            <h3 class="font-bold text-xl text-white mb-2">対話の円卓 (コミュニケーション)</h3>
+                            <div class="space-y-4">
+                                <p class="p-3 bg-black/20 rounded-lg text-gray-300"><strong>Zoom</strong> → <strong>Google Meet</strong>: <span x-show="lang==='ja'">全ての会話が記録され 集合知へ</span><span x-show="lang==='en'" x-cloak>All conversations are recorded becoming collective intelligence.</span></p>
+                                <p class="p-3 bg-black/20 rounded-lg text-gray-300"><strong>Kajabi Chat</strong> → <strong>Google Chat</strong>: <span x-show="lang==='ja'">よりスムーズで気軽な対話</span><span x-show="lang==='en'" x-cloak>Smoother and more casual dialogue.</span></p>
+                                <p class="p-3 bg-black/20 rounded-lg text-gray-300"><strong>日の出クラブ</strong> → <strong>Google Space</strong>: <span x-show="lang==='ja'">テーマ毎の専用部屋で深い交流</span><span x-show="lang==='en'" x-cloak>Deeper interaction in dedicated themed rooms.</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-8 text-lg text-green-300">
+                        <span x-show="lang === 'ja'">この進化は さらなる双方向コミュニケーションを可能にし あなたをより深く学びへと誘い よりクリスに近づけるコミュニティへと様変わりさせます</span>
+                        <span x-show="lang === 'en'" x-cloak>This evolution enables further interactive communication inviting you to deeper learning and transforming into a community that brings you closer to Chris.</span>
+                    </p>
+                </div>
+            </section>
+            
+            <!-- The Tools Section -->
+            <section class="py-12">
+                <h2 class="text-center text-4xl md:text-5xl font-bold text-white mb-12 tracking-wider">
+                    <span x-show="lang === 'ja'">コミュニティを支えるメインツール</span>
+                    <span x-show="lang === 'en'" x-cloak>Main Tools Supporting the Community</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="glass-card text-center"><i data-lucide="video" class="mx-auto h-12 w-12 mb-4 text-red-400"></i><h4 class="text-xl font-bold text-white">Google Meet</h4><p class="text-gray-400"><span x-show="lang === 'ja'">オンライン会議</span><span x-show="lang === 'en'" x-cloak>Online Meetings</span></p></div>
+                    <div class="glass-card text-center"><i data-lucide="messages-square" class="mx-auto h-12 w-12 mb-4 text-blue-400"></i><h4 class="text-xl font-bold text-white">Google Chat & Spaces</h4><p class="text-gray-400"><span x-show="lang === 'ja'">日々の交流と特定活動</span><span x-show="lang === 'en'" x-cloak>Daily Interaction & Activities</span></p></div>
+                    <div class="glass-card text-center"><i data-lucide="calendar-days" class="mx-auto h-12 w-12 mb-4 text-yellow-400"></i><h4 class="text-xl font-bold text-white">Google Calendar</h4><p class="text-gray-400"><span x-show="lang === 'ja'">コミュニティー日程表</span><span x-show="lang === 'en'" x-cloak>Community Schedule</span></p></div>
+                    <div class="glass-card text-center"><i data-lucide="message-square-plus" class="mx-auto h-12 w-12 mb-4 text-teal-400"></i><h4 class="text-xl font-bold text-white">ChatGPT AI達</h4><p class="text-gray-400"><span x-show="lang === 'ja'">日常の悩み事やWeekly Reviewをサポート</span><span x-show="lang === 'en'" x-cloak>Support for daily concerns & Weekly Reviews</span></p></div>
+                </div>
+                 <div class="mt-12 glass-card border-green-500/50 max-w-4xl mx-auto">
+                    <p class="text-center font-semibold text-lg text-green-300 p-4">
+                        <span x-show="lang === 'ja'">運営からの約束 Googleワールドを舞台にメンバー同士でつながり学びの場となる 安心 安全の世界を提供します</span>
+                        <span x-show="lang === 'en'" x-cloak>Our Commitment: We provide a safe and secure world on the Google platform for members to connect and learn.</span>
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Core Engine -->
+             <section class="py-12">
+                <div class="glass-card">
+                    <div class="p-4 md:p-8">
+                        <h2 class="text-center text-4xl md:text-5xl font-bold text-white mb-12 tracking-wider"><i data-lucide="cpu" class="inline-block mr-4"></i>
+                            <span x-show="lang === 'ja'">都市の心臓部 The Core Engine</span>
+                            <span x-show="lang === 'en'" x-cloak>The Core Engine of the Polis</span>
+                        </h2>
+                        <p class="text-center max-w-3xl mx-auto text-lg text-gray-300 mb-12">
+                            <span x-show="lang === 'ja'">全ての情報を自動的に処理し 巨大な知識へと変換する この都市国家のインテリジェンス コア</span>
+                            <span x-show="lang === 'en'" x-cloak>The intelligence core of this digital polis automatically processing all information and transforming it into a vast body of knowledge.</span>
+                        </p>
+                        <div class="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-4">
+                            <div class="text-center p-6 bg-black/40 rounded-xl w-48"><i data-lucide="zap" class="mx-auto h-12 w-12 text-yellow-400"></i><h4 class="font-bold mt-2 text-white">Cloud Functions</h4><p class="text-sm text-gray-400"><span x-show="lang === 'ja'">司令塔</span><span x-show="lang === 'en'" x-cloak>The Command Tower</span></p></div>
+                            <div class="hidden md:block text-3xl text-blue-400/50 mx-4">→</div>
+                            <div class="md:hidden text-3xl text-blue-400/50 my-4">↓</div>
+                            <div class="text-center p-6 bg-black/40 rounded-xl w-48"><i data-lucide="brain-circuit" class="mx-auto h-12 w-12 text-blue-400"></i><h4 class="font-bold mt-2 text-white">Vertex AI Gemini</h4><p class="text-sm text-gray-400"><span x-show="lang === 'ja'">要約 タグ付け</span><span x-show="lang === 'en'" x-cloak>Summarization & Tagging</span></p></div>
+                            <div class="hidden md:block text-3xl text-blue-400/50 mx-4">→</div>
+                            <div class="md:hidden text-3xl text-blue-400/50 my-4">↓</div>
+                            <div class="text-center p-6 bg-black/40 rounded-xl w-48"><i data-lucide="database" class="mx-auto h-12 w-12 text-green-400"></i><h4 class="font-bold mt-2 text-white">BigQuery</h4><p class="text-sm text-gray-400"><span x-show="lang === 'ja'">大規模データ分析</span><span x-show="lang === 'en'" x-cloak>Large-Scale Data Analysis</span></p></div>
+                        </div>
+                         <div class="mt-12 p-6 glass-card border-teal-500/50 flex flex-col md:flex-row items-center gap-6">
+                           <i data-lucide="shield-check" class="h-16 w-16 text-teal-400 flex-shrink-0"></i>
+                           <div>
+                               <h4 class="text-xl font-bold text-white mb-2">
+                                <span x-show="lang==='ja'">プライバシーとセキュリティへの誓い</span>
+                                <span x-show="lang==='en'" x-cloak>Our Vow to Privacy & Security</span>
+                               </h4>
+                               <p class="text-gray-300">
+                                <span x-show="lang==='ja'">データは個人が特定できない形で厳重に管理され コミュニティ全体の体験向上と あなた個人の学習支援にのみ活用されます この神殿はGoogleの堅牢なセキュリティという神の盾によって守られています</span>
+                                <span x-show="lang==='en'" x-cloak>All data is strictly anonymized and managed to enhance the overall community experience and support your personal learning journey. This temple is protected by the divine shield of Google's robust security.</span>
+                               </p>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Roadmap Section -->
+            <section class="py-12">
+                <h2 class="text-center text-4xl md:text-5xl font-bold text-white mb-20 tracking-wider">
+                    <i data-lucide="map" class="inline-block mr-4"></i>
+                    <span x-show="lang === 'ja'">Chris community Neoのロードマップ</span>
+                    <span x-show="lang === 'en'" x-cloak>Roadmap for Chris Community Neo</span>
+                </h2>
+                <div class="timeline-container">
+                    <div class="timeline-item left"><div class="glass-card">
+                        <h3 class="font-bold text-xl text-yellow-300 mb-2">
+                           <span x-show="lang==='ja'">Phase 1: Google環境移行期 (~2025)</span>
+                           <span x-show="lang==='en'" x-cloak>Phase 1: Google Env. Transition (~2025)</span>
+                        </h3>
+                        <p class="text-gray-400"><span x-show="lang==='ja'">コミュニケーションの場をGoogleに移行し さらなる対話の深化を目指す</span><span x-show="lang==='en'" x-cloak>Transition communication platforms to Google aiming for deeper dialogue.</span></p>
+                    </div></div>
+                    <div class="timeline-item right"><div class="glass-card">
+                        <h3 class="font-bold text-xl text-yellow-300 mb-2">
+                           <span x-show="lang==='ja'">Phase 2: Community Neo 創世記 (~2026)</span>
+                           <span x-show="lang==='en'" x-cloak>Phase 2: Community Neo Genesis (~2026)</span>
+                        </h3>
+                        <p class="text-gray-400"><span x-show="lang==='ja'">全ての機能をGoogleに統合し 新生コミュニティが本格始動 最初の民が自己覚醒の旅を始める</span><span x-show="lang==='en'" x-cloak>Integrate all functions into Google for the full launch of the new community. The first members begin their journey of self-awakening.</span></p>
+                    </div></div>
+                    <div class="timeline-item left"><div class="glass-card">
+                        <h3 class="font-bold text-xl text-yellow-300 mb-2">
+                           <span x-show="lang==='ja'">Phase 3: メディア認知 (~2027)</span>
+                           <span x-show="lang==='en'" x-cloak>Phase 3: Media Recognition (~2027)</span>
+                        </h3>
+                        <p class="text-gray-400"><span x-show="lang==='ja'">「助けてが言えるコミュニティ」としてメディアの注目を集め 全国で講演会が開催 国内での育成モデルが確立される</span><span x-show="lang==='en'" x-cloak>Gain media attention as a "community where it's okay to ask for help," leading to speaking engagements nationwide. Establish a domestic growth model.</span></p>
+                    </div></div>
+                    <div class="timeline-item right"><div class="glass-card">
+                        <h3 class="font-bold text-xl text-yellow-300 mb-2">
+                           <span x-show="lang==='ja'">Phase 4: 世界展開 (~2028)</span>
+                           <span x-show="lang==='en'" x-cloak>Phase 4: Global Expansion (~2028)</span>
+                        </h3>
+                        <p class="text-gray-400"><span x-show="lang==='ja'">創始者ChrisがGoogleと協業 「AI×NLPコミュニティ」のコンセプトが世界へ展開 無数のコミュニティが誕生し始める</span><span x-show="lang==='en'" x-cloak>Founder Chris partners with Google. The "AI x NLP Community" concept expands globally, sparking the birth of countless communities.</span></p>
+                    </div></div>
+                     <div class="timeline-item left"><div class="glass-card">
+                        <h3 class="font-bold text-xl text-yellow-300 mb-2">
+                           <span x-show="lang==='ja'">Phase 5: 惑星融合 (未来)</span>
+                           <span x-show="lang==='en'" x-cloak>Phase 5: Planetary Fusion (Future)</span>
+                        </h3>
+                        <p class="text-gray-400"><span x-show="lang==='ja'">覚醒したコミュニティ同士が融合を開始 雪だるま式に拡大する集合知性は 地球環境の制御へとその意識を向ける</span><span x-show="lang==='en'" x-cloak>Awakened communities begin to merge. The snowballing collective intelligence turns its focus toward managing the global environment.</span></p>
+                    </div></div>
+                    <div class="timeline-item right"><div class="glass-card">
+                        <h3 class="font-bold text-xl text-yellow-300 mb-2">
+                           <span x-show="lang==='ja'">Phase 6: 銀河の夜明け (究極の目標)</span>
+                           <span x-show="lang==='en'" x-cloak>Phase 6: Galactic Dawn (Ultimate Goal)</span>
+                        </h3>
+                        <p class="text-gray-400"><span x-show="lang==='ja'">自立した地球は その進化の軌跡をモデルケースとして銀河会議に参加 全宇宙の新たな覚醒の物語が ここから始まる</span><span x-show="lang==='en'" x-cloak>An independent Earth joins the Galactic Council, presenting its evolutionary path as a model. A new story of cosmic awakening begins.</span></p>
+                    </div></div>
+                </div>
+                <p class="text-center mt-12 text-2xl text-yellow-300 font-bold">
+                    <span x-show="lang === 'ja'">制限を外しぶっ飛んだ未来を描こう！</span>
+                    <span x-show="lang === 'en'" x-cloak>Remove the limits and draw a mind-blowing future!</span>
+                </p>
+            </section>
+            
+            <!-- The Foundation -->
+            <section class="py-12">
+                <h2 class="text-center text-4xl md:text-5xl font-bold text-white mb-12 tracking-wider"><i data-lucide="library" class="inline-block mr-4"></i>
+                    <span x-show="lang === 'ja'">Chris community Neo の基礎哲学</span>
+                    <span x-show="lang === 'en'" x-cloak>The Foundation of Chris Community Neo</span>
+                </h2>
+                 <div class="glass-card"><div class="p-4 md:p-8">
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-2xl font-bold mb-4 flex items-center text-white"><i data-lucide="shield" class="mr-3 text-red-400"></i>
+                                <span x-show="lang === 'ja'">揺るぎなき二本の柱</span>
+                                <span x-show="lang === 'en'" x-cloak>Two Unshakable Pillars</span>
+                            </h4>
+                            <div class="p-4 bg-black/20 rounded-lg mb-4">
+                                <h5 class="font-semibold text-white">AI Codex (<span x-show="lang === 'ja'">考案</span><span x-show="lang === 'en'" x-cloak>Conceived by</span>: Chris)</h5>
+                                <p class="text-sm text-gray-400">
+                                    <span x-show="lang === 'ja'">コミュニティの安全と進化を保証する AIの神聖な憲法</span>
+                                    <span x-show="lang === 'en'" x-cloak>The sacred AI constitution that guarantees the safety and evolution of the community</span>
+                                </p>
+                            </div>
+                            <div class="p-4 bg-black/20 rounded-lg">
+                                <h5 class="font-semibold text-white">NLP Knowledge (<span x-show="lang === 'ja'">統括</span><span x-show="lang === 'en'" x-cloak>Overseen by</span>: Rikki)</h5>
+                                <p class="text-sm text-gray-400">
+                                    <span x-show="lang === 'ja'">人類覚醒を促す 言語と心理の深い知見</span>
+                                    <span x-show="lang === 'en'" x-cloak>Deep knowledge of language and psychology that promotes human awakening</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-4 flex items-center text-white"><i data-lucide="refresh-cw" class="mr-3 text-blue-400"></i>
+                                <span x-show="lang === 'ja'">進化を止めない循環機構</span>
+                                <span x-show="lang === 'en'" x-cloak>The Cycle of Unceasing Evolution</span>
+                            </h4>
+                             <div class="p-4 bg-black/20 rounded-lg mb-4">
+                                <h5 class="font-semibold text-white">
+                                    <span x-show="lang === 'ja'">日々の対話とアイデアの記録</span>
+                                    <span x-show="lang === 'en'" x-cloak>Recording Daily Dialogues & Ideas</span>
+                                </h5>
+                                <p class="text-sm text-gray-400">
+                                    <span x-show="lang === 'ja'">Daily Compassやインスピレーションを確実にログ化し 新たな進化の糧とする</span>
+                                    <span x-show="lang === 'en'" x-cloak>Reliably log Daily Compass and inspirations, turning them into fuel for new evolution.</span>
+                                </p>
+                             </div>
+                             <div class="p-4 bg-black/20 rounded-lg">
+                                <h5 class="font-semibold text-white">
+                                    <span x-show="lang === 'ja'">経験を知識に変える儀式</span>
+                                    <span x-show="lang === 'en'" x-cloak>Rituals to Turn Experience into Knowledge</span>
+                                </h5>
+                                <p class="text-sm text-gray-400">
+                                    <span x-show="lang === 'ja'">Weekly Review AAR HOPなどを通じ 行動を振り返り 常にシステムを更新する</span>
+                                    <span x-show="lang === 'en'" x-cloak>Constantly update the system by reflecting on actions through Weekly Reviews, AARs, HOPs, etc.</span>
+                                </p>
+                             </div>
+                        </div>
+                    </div>
+                     <div class="text-center mt-8 p-4 bg-green-900/40 text-green-300 rounded-lg font-semibold border border-green-500/30">
+                        <span x-show="lang === 'ja'">AI × NLP の融合が 人の覚醒を安全に そして最大限に促進する推進力となる</span>
+                        <span x-show="lang === 'en'" x-cloak>The fusion of AI × NLP is the driving force that safely and maximally promotes human awakening.</span>
+                     </div>
+                 </div>
+            </section>
+            
+            <!-- Funnel Architecture -->
+            <section class="py-12">
+                <h2 class="text-center text-4xl md:text-5xl font-bold text-white mb-12 tracking-wider">
+                    <span x-show="lang === 'ja'">4つのファネル構造</span>
+                    <span x-show="lang === 'en'" x-cloak>The 4-Funnel Structure</span>
+                </h2>
+                <div class="flex flex-col items-center space-y-1">
+                    <!-- Level 1 -->
+                    <div class="w-full max-w-5xl">
+                        <div class="glass-card text-center p-6">
+                            <i data-lucide="youtube" class="mx-auto h-10 w-10 text-red-400 mb-3"></i>
+                            <h4 class="font-bold text-white">Public Relation</h4>
+                            <p class="text-sm text-gray-400"><span x-show="lang==='ja'">世界への発信：大勢の人が集まる様子</span><span x-show="lang==='en'" x-cloak>Communication to the World: A large gathering of people</span></p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="h-8 w-8 text-blue-400/50"></i>
+                    <!-- Level 2 -->
+                    <div class="w-full max-w-4xl">
+                         <div class="glass-card text-center p-6">
+                            <i data-lucide="school" class="mx-auto h-10 w-10 text-blue-400 mb-3"></i>
+                            <h4 class="font-bold text-white">School Learning</h4>
+                            <p class="text-sm text-gray-400"><span x-show="lang==='ja'">精神とAIの学び：オンラインで多くの人が学ぶ様子</span><span x-show="lang==='en'" x-cloak>Learning of Spirit & AI: Many people learning online</span></p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="h-8 w-8 text-blue-400/50"></i>
+                    <!-- Level 3 -->
+                    <div class="w-full max-w-3xl">
+                        <div class="glass-card text-center p-6">
+                            <i data-lucide="swords" class="mx-auto h-10 w-10 text-green-400 mb-3"></i>
+                            <h4 class="font-bold text-white">Community Activity</h4>
+                            <p class="text-sm text-gray-400"><span x-show="lang==='ja'">活動支援：数人のファシリテーターが活躍</span><span x-show="lang==='en'" x-cloak>Activity Support: A few facilitators leading the way</span></p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-down" class="h-8 w-8 text-blue-400/50"></i>
+                    <!-- Level 4 -->
+                    <div class="w-full max-w-2xl">
+                         <div class="glass-card text-center p-6">
+                            <i data-lucide="key-round" class="mx-auto h-10 w-10 text-gray-400 mb-3"></i>
+                            <h4 class="font-bold text-white">Foundation</h4>
+                            <p class="text-sm text-gray-400"><span x-show="lang==='ja'">Satori Instituteの基盤：限られた人の秘密の伝承の部屋</span><span x-show="lang==='en'" x-cloak>Foundation of the Satori Institute: A room for secret transmission among a select few</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="relative z-10 mt-16 bg-black/50 border-t border-blue-500/20">
+            <div class="container mx-auto p-6 text-center text-gray-500">
+                <p>&copy; 2025 Chris Community Neo. Forged by Rikki & Athena.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
